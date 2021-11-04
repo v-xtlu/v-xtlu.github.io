@@ -86,35 +86,11 @@
     <category term="工具" scheme="https://v-xtlu.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="Github" scheme="https://v-xtlu.github.io/tags/Github/"/>
-    
     <category term="博客" scheme="https://v-xtlu.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-    <category term="Hexo" scheme="https://v-xtlu.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作笔记</title>
-    <link href="https://v-xtlu.github.io/2021/08/03/document/"/>
-    <id>https://v-xtlu.github.io/2021/08/03/document/</id>
-    <published>2021-08-03T08:29:12.000Z</published>
-    <updated>2021-11-04T08:34:49.058Z</updated>
-    
-    <content type="html"><![CDATA[<p><img data-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc85f47e77a27ff84b4d141380f573797aa3d8b3f134be-JqXt81_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638606829&t=dc24a9963551bd8f22c9d04e02bd2df3">  </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc85f47e77a27ff84b4d141380f573797aa3d8b3f134be</summary>
-      
-    
-    
-    
-    <category term="笔记" scheme="https://v-xtlu.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-    
     <category term="Github" scheme="https://v-xtlu.github.io/tags/Github/"/>
+    
+    <category term="Hexo" scheme="https://v-xtlu.github.io/tags/Hexo/"/>
     
   </entry>
   
@@ -139,6 +115,30 @@
     
     
     <category term="博客" scheme="https://v-xtlu.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作笔记</title>
+    <link href="https://v-xtlu.github.io/2021/08/03/document/"/>
+    <id>https://v-xtlu.github.io/2021/08/03/document/</id>
+    <published>2021-08-03T08:29:12.000Z</published>
+    <updated>2021-11-04T08:34:49.058Z</updated>
+    
+    <content type="html"><![CDATA[<p><img data-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc85f47e77a27ff84b4d141380f573797aa3d8b3f134be-JqXt81_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638606829&t=dc24a9963551bd8f22c9d04e02bd2df3">  </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc85f47e77a27ff84b4d141380f573797aa3d8b3f134be</summary>
+      
+    
+    
+    
+    <category term="笔记" scheme="https://v-xtlu.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Github" scheme="https://v-xtlu.github.io/tags/Github/"/>
     
   </entry>
   
