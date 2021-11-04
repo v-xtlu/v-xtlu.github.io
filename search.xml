@@ -176,7 +176,7 @@
     <content><![CDATA[<blockquote>
 <p>博客搭建</p>
 </blockquote>
-<p>网页预览：<a href="https://yuumiy.github.io/">https://yuumiy.github.io</a></p>
+<p>网页预览：<a href="https://v-xtlu.github.io/">https://v-xtlu.github.io</a></p>
 <span id="more"></span>
 
 <h1 id="第一部分-搭建与发布"><a href="#第一部分-搭建与发布" class="headerlink" title="第一部分 搭建与发布"></a>第一部分 搭建与发布</h1><h2 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h2><p>windows10<br>Github<br>Visual Studio Code<br>Hexo 5.4.0 + Next 7.8.0<br>Git 2.31.1<br>Node.js 14.16.1</p>
