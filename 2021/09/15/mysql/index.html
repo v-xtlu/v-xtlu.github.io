@@ -21,31 +21,34 @@
     var CONFIG = {"hostname":"v-xtlu.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"scrollpercent":true,"onmobile":false,"b2t":true,"width":310},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="coding就是无尽的动力">
-<meta property="og:type" content="website">
-<meta property="og:title" content="梦想启航">
-<meta property="og:url" content="https://v-xtlu.github.io/index.html">
+  <meta name="description" content="阿里云安装配置MySQL（centos版）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL搭建">
+<meta property="og:url" content="https://v-xtlu.github.io/2021/09/15/mysql/index.html">
 <meta property="og:site_name" content="梦想启航">
-<meta property="og:description" content="coding就是无尽的动力">
+<meta property="og:description" content="阿里云安装配置MySQL（centos版）">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-15T08:29:12.000Z">
+<meta property="article:modified_time" content="2021-11-04T08:54:06.224Z">
 <meta property="article:author" content="Lutx">
-<meta property="article:tag" content="Lutx">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="DataBase">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://v-xtlu.github.io/">
+<link rel="canonical" href="https://v-xtlu.github.io/2021/09/15/mysql/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>梦想启航</title>
+  <title>MySQL搭建 | 梦想启航</title>
   
 
 
@@ -189,9 +192,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -207,10 +211,9 @@
       <meta itemprop="name" content="梦想启航">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/15/mysql/" class="post-title-link" itemprop="url">MySQL搭建</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          MySQL搭建
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -256,464 +259,89 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
+        <blockquote>
 <p>阿里云安装配置MySQL（centos版）</p>
 </blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/15/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+<span id="more"></span>
+
+<h1 id="搭建与发布"><a href="#搭建与发布" class="headerlink" title="搭建与发布"></a>搭建与发布</h1><h2 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h2><p>linux服务器<br>MySQL</p>
+<h2 id="MySQL搭建步骤"><a href="#MySQL搭建步骤" class="headerlink" title="MySQL搭建步骤"></a>MySQL搭建步骤</h2><h3 id="1、下载MySQL源安装包"><a href="#1、下载MySQL源安装包" class="headerlink" title="1、下载MySQL源安装包"></a>1、下载MySQL源安装包</h3><p>下载mysql源安装包:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="regexp">//</span>dev.mysql.com<span class="regexp">/get/my</span>sql57-community-release-el7-<span class="number">8</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装MySQL源"><a href="#2、安装MySQL源" class="headerlink" title="2、安装MySQL源"></a>2、安装MySQL源</h3><p>安装mysql源:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">yum</span> localinstall mysql<span class="number">57</span>-community-release-el<span class="number">7</span>-<span class="number">8</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>若结尾出现complete!，则说明MySQL源安装完成</p>
+<h3 id="3、安装MySQL源是否安装完成"><a href="#3、安装MySQL源是否安装完成" class="headerlink" title="3、安装MySQL源是否安装完成"></a>3、安装MySQL源是否安装完成</h3><p>检测是否安装完成:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist enabled <span class="string">| grep &quot;</span>mysql.*-community.*<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、安装MySQL"><a href="#4、安装MySQL" class="headerlink" title="4、安装MySQL"></a>4、安装MySQL</h3><p>若结尾出现Complete!， 则MySQL安装完成</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum module <span class="keyword">disable </span>mysql</span><br><span class="line">yum <span class="keyword">install </span>mysql-community-server</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="5、设置开启启动MySQL服务"><a href="#5、设置开启启动MySQL服务" class="headerlink" title="5、设置开启启动MySQL服务"></a>5、设置开启启动MySQL服务</h3><p>设置MySQL服务启动</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、检测是否启动成功和查看版本号"><a href="#6、检测是否启动成功和查看版本号" class="headerlink" title="6、检测是否启动成功和查看版本号"></a>6、检测是否启动成功和查看版本号</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="keyword">status</span> mysqld.service</span><br></pre></td></tr></table></figure>
+<p>查看版本号</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -aq <span class="string">| grep -i mysql</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、获取临时密码，MySQL5-7为root用户随机生成了一个密码"><a href="#7、获取临时密码，MySQL5-7为root用户随机生成了一个密码" class="headerlink" title="7、获取临时密码，MySQL5.7为root用户随机生成了一个密码"></a>7、获取临时密码，MySQL5.7为root用户随机生成了一个密码</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grep</span> <span class="string">&#x27;temporary password&#x27;</span> <span class="regexp">/var/</span>log/mysqld.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、通过临时密码登录MySQL，进行修改密码操作"><a href="#8、通过临时密码登录MySQL，进行修改密码操作" class="headerlink" title="8、通过临时密码登录MySQL，进行修改密码操作"></a>8、通过临时密码登录MySQL，进行修改密码操作</h3><p><code>mysql -uroot -p</code> 使用临时密码登录后，不能进行其他的操作，否则会报错，这时候我们进行修改密码操作</p>
+<h3 id="9、我们一般需要自己设置简单的密码，所以我们全局修改一下"><a href="#9、我们一般需要自己设置简单的密码，所以我们全局修改一下" class="headerlink" title="9、我们一般需要自己设置简单的密码，所以我们全局修改一下"></a>9、我们一般需要自己设置简单的密码，所以我们全局修改一下</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="builtin-name">set</span> global <span class="attribute">validate_password_policy</span>=0;</span><br><span class="line">mysql&gt; <span class="builtin-name">set</span> global <span class="attribute">validate_password_length</span>=1;</span><br></pre></td></tr></table></figure>
+<p>这时候我们就可以自己设置想要的密码了</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;yourpassword&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="10、授权其他机器远程登录"><a href="#10、授权其他机器远程登录" class="headerlink" title="10、授权其他机器远程登录"></a>10、授权其他机器远程登录</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> <span class="keyword">option</span>;</span><br><span class="line">flush <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11、开启开机自启动"><a href="#11、开启开机自启动" class="headerlink" title="11、开启开机自启动"></a>11、开启开机自启动</h3><p>先退出mysql命令行，然后输入以下命令</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> mysqld</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="12、防火墙开放3306端口"><a href="#12、防火墙开放3306端口" class="headerlink" title="12、防火墙开放3306端口"></a>12、防火墙开放3306端口</h3><p>请前往<a target="_blank" rel="noopener" href="https://account.aliyun.com/login/login.htm?oauth_callback=https://swas.console.aliyun.com/&lang=zh#/server/9241377d17484425a06c0c92d382c7b7/cn-hangzhou/dashboard">服务器控制面板</a>开放端口</p>
+
+    </div>
+
+    
+    
+    
+      <!-- 文章结束标志 -->
+      <div>
         
-      
-    </div>
-
+          <div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+</div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://v-xtlu.github.io/2021/08/12/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lutx">
-      <meta itemprop="description" content="coding就是无尽的动力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梦想启航">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/12/nginx/" class="post-title-link" itemprop="url">Nginx搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-12 16:29:12" itemprop="dateCreated datePublished" datetime="2021-08-12T16:29:12+08:00">2021-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>nginx离线部署</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/12/nginx/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
+      </div>
 
-    
-    
-    
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://v-xtlu.github.io/2021/08/04/blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lutx">
-      <meta itemprop="description" content="coding就是无尽的动力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梦想启航">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/04/blog/" class="post-title-link" itemprop="url">Blog搭建</a>
-        </h2>
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+              <a href="/tags/DataBase/" rel="tag"><i class="fa fa-tag"></i> DataBase</a>
+          </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-04 16:29:12" itemprop="dateCreated datePublished" datetime="2021-08-04T16:29:12+08:00">2021-08-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>14 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>博客搭建</p>
-</blockquote>
-<p>网页预览：<a target="_blank" rel="noopener" href="https://yuumiy.github.io/">https://yuumiy.github.io</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/04/blog/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://v-xtlu.github.io/2021/08/03/document/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lutx">
-      <meta itemprop="description" content="coding就是无尽的动力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梦想启航">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/03/document/" class="post-title-link" itemprop="url">操作笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-03 16:29:12" itemprop="dateCreated datePublished" datetime="2021-08-03T16:29:12+08:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img data-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc85f47e77a27ff84b4d141380f573797aa3d8b3f134be-JqXt81_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638606829&t=dc24a9963551bd8f22c9d04e02bd2df3">  </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://v-xtlu.github.io/2021/08/03/hello-hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lutx">
-      <meta itemprop="description" content="coding就是无尽的动力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梦想启航">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/03/hello-hexo/" class="post-title-link" itemprop="url">Hello Hexo</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-03 16:29:12" itemprop="dateCreated datePublished" datetime="2021-08-03T16:29:12+08:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>159</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://v-xtlu.github.io/2021/08/03/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lutx">
-      <meta itemprop="description" content="coding就是无尽的动力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梦想启航">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/03/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-03 16:29:12" itemprop="dateCreated datePublished" datetime="2021-08-03T16:29:12+08:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/03/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/12/nginx/" rel="prev" title="Nginx搭建">
+      <i class="fa fa-chevron-left"></i> Nginx搭建
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -766,6 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="nav-text">搭建与发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="nav-text">项目环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="nav-text">MySQL搭建步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%8B%E8%BD%BDMySQL%E6%BA%90%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">1、下载MySQL源安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85MySQL%E6%BA%90"><span class="nav-text">2、安装MySQL源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85MySQL%E6%BA%90%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90"><span class="nav-text">3、安装MySQL源是否安装完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85MySQL"><span class="nav-text">4、安装MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E8%AE%BE%E7%BD%AE%E5%BC%80%E5%90%AF%E5%90%AF%E5%8A%A8MySQL%E6%9C%8D%E5%8A%A1"><span class="nav-text">5、设置开启启动MySQL服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F%E5%92%8C%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-text">6、检测是否启动成功和查看版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E8%8E%B7%E5%8F%96%E4%B8%B4%E6%97%B6%E5%AF%86%E7%A0%81%EF%BC%8CMySQL5-7%E4%B8%BAroot%E7%94%A8%E6%88%B7%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E4%BA%86%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81"><span class="nav-text">7、获取临时密码，MySQL5.7为root用户随机生成了一个密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E9%80%9A%E8%BF%87%E4%B8%B4%E6%97%B6%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95MySQL%EF%BC%8C%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E6%93%8D%E4%BD%9C"><span class="nav-text">8、通过临时密码登录MySQL，进行修改密码操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E6%88%91%E4%BB%AC%E4%B8%80%E8%88%AC%E9%9C%80%E8%A6%81%E8%87%AA%E5%B7%B1%E8%AE%BE%E7%BD%AE%E7%AE%80%E5%8D%95%E7%9A%84%E5%AF%86%E7%A0%81%EF%BC%8C%E6%89%80%E4%BB%A5%E6%88%91%E4%BB%AC%E5%85%A8%E5%B1%80%E4%BF%AE%E6%94%B9%E4%B8%80%E4%B8%8B"><span class="nav-text">9、我们一般需要自己设置简单的密码，所以我们全局修改一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E6%8E%88%E6%9D%83%E5%85%B6%E4%BB%96%E6%9C%BA%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="nav-text">10、授权其他机器远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E5%BC%80%E5%90%AF%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="nav-text">11、开启开机自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E5%BC%80%E6%94%BE3306%E7%AB%AF%E5%8F%A3"><span class="nav-text">12、防火墙开放3306端口</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
