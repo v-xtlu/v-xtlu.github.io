@@ -35,7 +35,52 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>博客</tag>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS搭建 Express + Mysql + ejs</title>
+    <url>/2021/11/04/express/</url>
+    <content><![CDATA[<blockquote>
+<p>CentOS搭建 Express + Mysql + ejs</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="搭建与发布"><a href="#搭建与发布" class="headerlink" title="搭建与发布"></a>搭建与发布</h1><h2 id="项目环境"><a href="#项目环境" class="headerlink" title="项目环境"></a>项目环境</h2><p>CentOS服务器<br>Node环境<br>Express<br>ejs<br>Mysql</p>
+<h2 id="搭建项目环境"><a href="#搭建项目环境" class="headerlink" title="搭建项目环境"></a>搭建项目环境</h2><p>CentOS服务器上面已经搭建好了<a href="https://v-xtlu.github.io/2021/11/03/node/">Node环境</a>、<a href="https://v-xtlu.github.io/2021/09/15/mysql/">Mysql环境</a></p>
+<h2 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h2><p>新建一个文件夹 命名为node-api，初始化npm配置</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">npm</span> init</span><br></pre></td></tr></table></figure>
+
+<p>根目录下新建public静态资源库 app.js入口文件 src 项目开发目录  src下新建 controllers 接口控制  router 路由配置接口应用</p>
+<h3 id="1、目录构成"><a href="#1、目录构成" class="headerlink" title="1、目录构成"></a>1、目录构成</h3><blockquote>
+<p>public 静态资源库<br>app.js 入口<br>views EJS模板文件<br>router.js 接口和处理路由 业务判断 数据库处理</p>
+</blockquote>
+<h3 id="2、安装第三方插件"><a href="#2、安装第三方插件" class="headerlink" title="2、安装第三方插件"></a>2、安装第三方插件</h3><p><a href="https://ejs.bootcss.com/">ejs官网</a> sso渲染经常看见</p>
+<p><code>vue使用mustache，主要是使用&#123;&#123;&#125;&#125;进行数据渲染</code></p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">npm install <span class="built_in">express</span> --<span class="built_in">save</span></span><br><span class="line">npm install ejs --<span class="built_in">save</span></span><br><span class="line">npm install mysql --<span class="built_in">save</span></span><br><span class="line">npm install nodemon --<span class="built_in">save</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、编写入口文件"><a href="#3、编写入口文件" class="headerlink" title="3、编写入口文件"></a>3、编写入口文件</h3><p>创建一个服务 设置中间件</p>
+<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个服务</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.0设置模板引擎</span></span><br><span class="line">app.<span class="built_in">set</span>(<span class="string">&#x27;views&#x27;</span>, path.<span class="built_in">join</span>(__dirname, <span class="string">&#x27;views&#x27;</span>));</span><br><span class="line">app.<span class="built_in">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.1设置静态资源代理</span></span><br><span class="line">app.use(express.<span class="keyword">static</span>(path.<span class="built_in">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.2 使用路由</span></span><br><span class="line">app.use(router)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">18088</span>, function () &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">&#x27;vue-cms的api服务已启动, :18088&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、编写路由文件"><a href="#4、编写路由文件" class="headerlink" title="4、编写路由文件"></a>4、编写路由文件</h3><p>router.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>)</span><br><span class="line"><span class="comment">// 获取路由实例</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接池</span></span><br><span class="line"><span class="keyword">const</span> pool  = mysql.createPool(&#123;</span><br><span class="line">  <span class="attr">connectionLimit</span> : <span class="number">10</span>,</span><br><span class="line">  <span class="attr">host</span>            : <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="attr">user</span>            : <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>        : <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">  <span class="attr">database</span>        : <span class="string">&#x27;dtcmsdb5&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/getStudents&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;getStudents&#x27;</span>, req.query)</span><br><span class="line"></span><br><span class="line">  pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sql = <span class="string">&#x27;SELECT * FROM td_student&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err; <span class="comment">// not connected!</span></span><br><span class="line">    <span class="comment">// Use the connection</span></span><br><span class="line">    connection.query(sql, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// When done with the connection, release it.</span></span><br><span class="line">      connection.release();</span><br><span class="line">      <span class="built_in">console</span>.log(results)</span><br><span class="line">      <span class="comment">// 根据筛选的条件获取数据新息</span></span><br><span class="line">      res.render(<span class="string">&#x27;student&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">res</span>: results</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="comment">// Handle error after the release.</span></span><br><span class="line">      <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">      <span class="comment">// Don&#x27;t use the connection here, it has been returned to the pool.</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 暴露路由</span></span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、编写ejs模板文件"><a href="#5、编写ejs模板文件" class="headerlink" title="5、编写ejs模板文件"></a>5、编写ejs模板文件</h3><p>views 下创建对应的模板文件</p>
+<figure class="highlight vbscript-html"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>学生列表<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&#x27;stylesheet&#x27;</span> <span class="attr">href</span>=<span class="string">&#x27;/stylesheets/style.css&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>学生列表<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!--</span></span><span class="vbscript">&lt;% %&gt;</span><span class="xml"><span class="comment"> 是编写javascript代码的ejs模板引擎语法 --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>编学生号<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>学生姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>学生性别<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>学生家庭地址<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>备注<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="vbscript">&lt;% res.forEach(<span class="keyword">function</span>(item)&#123; %&gt;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="vbscript">&lt;%= item.no %&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="vbscript">&lt;%= item.name %&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="vbscript">&lt;%= item.sex %&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="vbscript">&lt;%= item.address %&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="vbscript">&lt;%= item.remark %&gt;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">      </span><span class="vbscript">&lt;% &#125;); %&gt;</span><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6、运行项目"><a href="#6、运行项目" class="headerlink" title="6、运行项目"></a>6、运行项目</h3><p>package.json配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;node-api&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.1&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;api mangage&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;main&quot;</span>: <span class="string">&quot;app.js&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;start&quot;</span>: <span class="string">&quot;nodemon app.js&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: <span class="string">&quot;lutx&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;ejs&quot;</span>: <span class="string">&quot;^3.1.6&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;express&quot;</span>: <span class="string">&quot;^4.17.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mysql&quot;</span>: <span class="string">&quot;^2.18.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;nodemon&quot;</span>: <span class="string">&quot;^2.0.14&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以下命令</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">npm <span class="builtin-name">run</span> start</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>CentOS</tag>
+        <tag>Mysql</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
@@ -47,7 +92,7 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>博客</tag>
+        <tag>Blog</tag>
       </tags>
   </entry>
   <entry>
@@ -171,10 +216,10 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS搭建Node项目</title>
+    <title>CentOS搭建Node运行环境</title>
     <url>/2021/11/03/node/</url>
     <content><![CDATA[<blockquote>
-<p>CentOS搭建和运行Node项目</p>
+<p>CentOS搭建Node运行环境</p>
 </blockquote>
 <span id="more"></span>
 
@@ -235,10 +280,10 @@
 
 
 <h3 id="2、编译安装Node环境"><a href="#2、编译安装Node环境" class="headerlink" title="2、编译安装Node环境"></a>2、编译安装Node环境</h3><p>请参考<a href="https://www.jianshu.com/p/6da7fbb39e8c">喜糖先生</a></p>
-<h2 id="运行Nodejs项目"><a href="#运行Nodejs项目" class="headerlink" title="运行Nodejs项目"></a>运行Nodejs项目</h2><p>查看对应的npm版本号</p>
+<h2 id="安装第三方插件"><a href="#安装第三方插件" class="headerlink" title="安装第三方插件"></a>安装第三方插件</h2><p>查看对应的npm版本号</p>
 <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">npm -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
 <p>上传node.js项目，借助工具<a href="http://www.hostbuf.com/t/988.html">FinalShell</a></p>
-<p>安装以来环境，执行安装命令<code>npm install</code>，以来安装完成，运行依赖,<code>npm run start</code></p>
+<p>安装依赖环境，执行安装命令<code>npm install</code>，以来安装完成，运行依赖,<code>npm run start</code></p>
 <figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">npm</span> install</span><br><span class="line"><span class="built_in">npm</span> run start</span><br></pre></td></tr></table></figure>
 
 <p>一旦退出工具连接，服务会自动停止（<code>仅限开发环境使用</code>）</p>
@@ -467,8 +512,8 @@
       </categories>
       <tags>
         <tag>Github</tag>
+        <tag>Blog</tag>
         <tag>Hexo</tag>
-        <tag>Blob</tag>
       </tags>
   </entry>
 </search>
