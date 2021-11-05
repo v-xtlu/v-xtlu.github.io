@@ -29,11 +29,11 @@
 <meta property="og:description" content="博客搭建  网页预览：https:&#x2F;&#x2F;v-xtlu.github.io">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-04T08:29:12.000Z">
-<meta property="article:modified_time" content="2021-11-04T09:11:06.502Z">
+<meta property="article:modified_time" content="2021-11-05T06:26:18.796Z">
 <meta property="article:author" content="Lutx">
-<meta property="article:tag" content="博客">
 <meta property="article:tag" content="Github">
 <meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Blob">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://v-xtlu.github.io/2021/08/04/blog/">
@@ -334,6 +334,12 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文章、站点字数统计</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span>                <span class="comment"># 文章字数统计</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span>                   <span class="comment"># 文章阅读时长</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">true</span>          <span class="comment"># 站点总字数统计</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">true</span>             <span class="comment"># 站点总阅读时长</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span>     <span class="comment"># 排除代码字数统计</span></span><br></pre></td></tr></table></figure>
 <p>修改主题配置文件：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span>     <span class="comment"># 是否另起一行（true的话不和发表时间等同一行）</span></span><br><span class="line">  <span class="attr">item_text_post:</span> <span class="literal">true</span>     <span class="comment"># 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">true</span>   <span class="comment"># 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长）</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span>                   <span class="comment"># Average Word Length</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span>                 <span class="comment"># Words Per Minute（每分钟阅读词数）</span></span><br></pre></td></tr></table></figure>
+
+<p>文章阅读次数统计</p>
+<p>打开next主题配置文件<code>\themes\next_config.yml</code>，搜索找到<code>busuanzi_count</code>，把enable设置为true</p>
+<p>同样是在next主题配置文件<code>\themes\next_config.yml</code>下，搜索<code>footer</code>，在它底下添加counter，设值为true<br>#统计</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">counter:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="9、网站底部添加网站运行时间"><a href="#9、网站底部添加网站运行时间" class="headerlink" title="9、网站底部添加网站运行时间"></a>9、网站底部添加网站运行时间</h3><p>修改主题下layout/_partials/footer.swig，在{ {- next_inject(‘footer’) } }上方添加如下内容：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 网站运行时间的设置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;timeDate&quot;</span>&gt;</span>载入天数...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;times&quot;</span>&gt;</span>载入时分秒...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">createtime</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> grt= <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;08/10/2021 12:00:00&quot;</span>);<span class="comment">//此处修改你的建站时间或者网站上线时间</span></span></span><br><span class="line"><span class="javascript">        now.setTime(now.getTime()+<span class="number">250</span>);</span></span><br><span class="line"><span class="javascript">        days = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> / <span class="number">24</span>; dnum = <span class="built_in">Math</span>.floor(days);</span></span><br><span class="line"><span class="javascript">        hours = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> - (<span class="number">24</span> * dnum); hnum = <span class="built_in">Math</span>.floor(hours);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(<span class="built_in">String</span>(hnum).length ==<span class="number">1</span> )&#123;hnum = <span class="string">&quot;0&quot;</span> + hnum;&#125; minutes = (now - grt ) / <span class="number">1000</span> /<span class="number">60</span> - (<span class="number">24</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * hnum);</span></span><br><span class="line"><span class="javascript">        mnum = <span class="built_in">Math</span>.floor(minutes); <span class="keyword">if</span>(<span class="built_in">String</span>(mnum).length ==<span class="number">1</span> )&#123;mnum = <span class="string">&quot;0&quot;</span> + mnum;&#125;</span></span><br><span class="line"><span class="javascript">        seconds = (now - grt ) / <span class="number">1000</span> - (<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * <span class="number">60</span> * hnum) - (<span class="number">60</span> * mnum);</span></span><br><span class="line"><span class="javascript">        snum = <span class="built_in">Math</span>.round(seconds); <span class="keyword">if</span>(<span class="built_in">String</span>(snum).length ==<span class="number">1</span> )&#123;snum = <span class="string">&quot;0&quot;</span> + snum;&#125;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">&quot;timeDate&quot;</span>).innerHTML = <span class="string">&quot;本站已安全运行 &quot;</span>+dnum+<span class="string">&quot; 天 &quot;</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">&quot;times&quot;</span>).innerHTML = hnum + <span class="string">&quot; 小时 &quot;</span> + mnum + <span class="string">&quot; 分 &quot;</span> + snum + <span class="string">&quot; 秒&quot;</span>;</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">setInterval</span>(<span class="string">&quot;createtime()&quot;</span>,<span class="number">250</span>);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -470,9 +476,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
               <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i> Github</a>
               <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Blob/" rel="tag"><i class="fa fa-tag"></i> Blob</a>
           </div>
 
         
@@ -481,8 +487,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/03/hello-hexo/" rel="prev" title="Hello Hexo">
-      <i class="fa fa-chevron-left"></i> Hello Hexo
+    <a href="/2021/08/03/document/" rel="prev" title="操作笔记">
+      <i class="fa fa-chevron-left"></i> 操作笔记
     </a></div>
       <div class="post-nav-item">
     <a href="/2021/08/12/nginx/" rel="next" title="Nginx搭建">
@@ -562,7 +568,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -575,7 +581,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -633,13 +639,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">27k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21 分钟</span>
+    <span title="站点阅读时长">24 分钟</span>
 </div>
 
 <!-- 网站运行时间的设置 -->
